@@ -31,41 +31,8 @@ cf1:Credit("xHeptc: UI Library")
 --autofarm
 local autofarm = autofarmTab:Section("Autofarm")
 autofarm:Label("All types of autofarm")
-autofarm:Label("Press L to use token autofarm")
 
 --tokens autofarm
-local player = game.Players.LocalPlayer
-local tokensFolder = game:GetService("Workspace").GameKeeper.Map.Tokens
-local toggle = false
-local frequency = 5 -- in seconds
-
-local function teleportTokens()
-    for _, token in ipairs(tokensFolder:GetChildren()) do
-        if token:IsA("BasePart") and token.Name == "Token" then
-            local distance = (player.Character.HumanoidRootPart.Position - token.Position).Magnitude
-            if distance < 20000 then
-                token.CFrame = player.Character.HumanoidRootPart.CFrame
-            end
-        end
-    end
-end
-
-local function toggleTeleportTokens()
-    toggle = not toggle
-    if toggle then
-        while toggle do
-            teleportTokens()
-            wait(frequency)
-        end
-    end
-end
-
-game:GetService("UserInputService").InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.L then -- change to desired key
-        toggleTeleportTokens()
-    end
-end)
-
 
 --esp
 local esp = espTab:Section("ESP")
